@@ -27,14 +27,14 @@ public class MainActivity extends Activity {
 
         //Set-up Firebase
         appData.firebaseDBInstance = FirebaseDatabase.getInstance();
-        appData.firebaseReference = appData.firebaseDBInstance.getReference("contacts");
+        appData.firebaseReference = appData.firebaseDBInstance.getReferenceFromUrl("https://assignment-3-a972f.firebaseio.com/");
 
         //Get the reference to the UI contents
         contactListView = (ListView) findViewById(R.id.listView);
 
         //Set up the List View
        firebaseAdapter = new FirebaseListAdapter<Contact>(this, Contact.class,
-                android.R.layout.simple_list_item_1, appData.firebaseReference) {
+                android.R.layout.simple_list_item_1, appData.firebaseReference.getRoot()) {
             @Override
             protected void populateView(View v, Contact model, int position) {
                 TextView contactName = (TextView)v.findViewById(android.R.id.text1);
